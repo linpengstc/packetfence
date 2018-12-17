@@ -45,7 +45,7 @@ const PortalModulesList = () => import(/* webpackChunkName: "Configuration" */ '
 const PortalModuleView = () => import(/* webpackChunkName: "Configuration" */ '../_components/PortalModuleView')
 
 const SecurityEventsList = () => import(/* webpackChunkName: "Configuration" */ '../_components/SecurityEventsList')
-//const SecurityEventView = () => import(/* webpackChunkName: "Configuration" */ '../_components/SecurityEventView')
+const SecurityEventView = () => import(/* webpackChunkName: "Configuration" */ '../_components/SecurityEventView')
 
 const route = {
   path: '/configuration',
@@ -100,6 +100,9 @@ const route = {
     }
     if (!store.state.$_switch_groups) {
       store.registerModule('$_switch_groups', SwitchGroupsStore)
+    }
+    if (!store.state.$_security_events) {
+      store.registerModule('$_security_events', SecurityEventsStore)
     }
     next()
   },
@@ -615,23 +618,23 @@ const route = {
       component: SecurityEventsList,
       props: (route) => ({ query: route.query.query })
     },
-    //{
-    //  path: 'security_events/new',
-    //  name: 'newSecurityEvent',
-    //  component: SecurityEventView,
-    //  props: (route) => ({ storeName: '$_security_events', isNew: true })
-    //},
-    //{
-    //  path: 'security_event/:id',
-    //  name: 'security_event',
-    //  component: SecurityEventView,
-    //  props: (route) => ({ storeName: '$_security_events', id: route.params.id }),
-    //  beforeEnter: (to, from, next) => {
-    //    store.dispatch('$_security_events/getSecurityEvent', to.params.id).then(object => {
-    //      next()
-    //    })
-    //  }
-    //}
+    {
+      path: 'security_events/new',
+      name: 'newSecurityEvent',
+      component: SecurityEventView,
+      props: (route) => ({ storeName: '$_security_events', isNew: true })
+    },
+    {
+      path: 'security_event/:id',
+      name: 'security_event',
+      component: SecurityEventView,
+      props: (route) => ({ storeName: '$_security_events', id: route.params.id }),
+      beforeEnter: (to, from, next) => {
+        store.dispatch('$_security_events/getSecurityEvent', to.params.id).then(object => {
+          next()
+        })
+      }
+    }
   ]
 }
 
