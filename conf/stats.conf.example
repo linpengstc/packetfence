@@ -202,3 +202,9 @@ api_compile=$.items[*].network, $.items[*].percentused
 interval=60s
 randomize=true
 management=false
+
+[metric 'Error in packetfence.log']
+type=tail_file
+file=/usr/local/pf/logs/packetfence.log
+match=ERROR
+statsd_ns=source.packetfence.packetfence_log.error
