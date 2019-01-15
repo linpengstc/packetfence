@@ -212,8 +212,8 @@ statsd_ns=source.packetfence.packetfence_log.error
 [metric 'DHCP messages in pfdhcp.log']
 type=tail_file
 file=/usr/local/pf/logs/pfdhcp.log
-match=DHCPDISCOVER,DHCPOFFER,DHCPREQUEST,DHCPACK,DHCPNAK
-statsd_ns=source.packetfence.pfdhcp_log.dhcpdiscover,source.packetfence.pfdhcp_log.dhcpoffer,source.packetfence.pfdhcp_log.dhcprequest,source.packetfence.pfdhcp_log.dhcpack,source.packetfence.pfdhcp_log.dhcpnak
+match=DHCPDISCOVER,DHCPOFFER,DHCPREQUEST,DHCPACK,DHCPNAK,DHCPDECLINE,DHCPRELEASE,DHCPINFORM
+statsd_ns=source.packetfence.pfdhcp_log.dhcpdiscover,source.packetfence.pfdhcp_log.dhcpoffer,source.packetfence.pfdhcp_log.dhcprequest,source.packetfence.pfdhcp_log.dhcpack,source.packetfence.pfdhcp_log.dhcpnak,source.packetfence.pfdhcp_log.dhcpdecline,source.packetfence.pfdhcp_log.dhcprelease,source.packetfence.pfdhcp_log.dhcpinform
 
 [metric 'RADIUS load_balancer.log']
 type=tail_file
