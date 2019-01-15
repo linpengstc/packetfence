@@ -224,8 +224,8 @@ statsd_ns=source.packetfence.radius_load_balancer_log.unknown_client,source.pack
 [metric 'RADIUS radius.log']
 type=tail_file
 file=/usr/local/pf/logs/radius.log
-match=unknown client,invalid Message-Authenticator,0xc0000072,c000006d,0xc0000001,sql_reject
-statsd_ns=source.packetfence.radius_log.unknown_client,source.packetfence.radius_log.invalid_message_authenticator,source.packetfence.radius_log.account_disabled,source.packetfence.radius_log.bad_username_or_password,source.packetfence.radius_log.reading_winbind_reply_failed,source.packetfence.radius_log.sql_reject
+match=unknown client,invalid Message-Authenticator,0xc0000072,c000006d,0xc0000001,sql_reject,Ignoring duplicate packet
+statsd_ns=source.packetfence.radius_log.unknown_client,source.packetfence.radius_log.invalid_message_authenticator,source.packetfence.radius_log.account_disabled,source.packetfence.radius_log.bad_username_or_password,source.packetfence.radius_log.reading_winbind_reply_failed,source.packetfence.radius_log.sql_reject,source.packetfence.radius_log.duplicate_packet
 
 [metric 'RADIUS radius-acct.log']
 type=tail_file
