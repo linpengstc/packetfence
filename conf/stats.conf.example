@@ -206,8 +206,8 @@ management=false
 [metric 'Error in packetfence.log']
 type=tail_file
 file=/usr/local/pf/logs/packetfence.log
-match=ERROR
-statsd_ns=source.packetfence.packetfence_log.error
+match=ERROR,httpd.portal.*Unable to match MAC address to IP.*ip2mac.*
+statsd_ns=source.packetfence.packetfence_log.error,source.packetfence.packetfence_log.portal.ip2mac
 
 [metric 'DHCP messages in pfdhcp.log']
 type=tail_file
@@ -224,8 +224,14 @@ statsd_ns=source.packetfence.radius_load_balancer_log.unknown_client,source.pack
 [metric 'RADIUS radius.log']
 type=tail_file
 file=/usr/local/pf/logs/radius.log
-match=unknown client,invalid Message-Authenticator
-statsd_ns=source.packetfence.radius_log.unknown_client,source.packetfence.radius_log.invalid_message_authenticator
+match=unknown client,invalid Message-Authenticator,0xc0000072,c000006d,0xc0000001,sql_reject
+statsd_ns=source.packetfence.radius_log.unknown_client,source.packetfence.radius_log.invalid_message_authenticator,source.packetfence.radius_log.account_disabled,source.packetfence.radius_log.bad_username_or_password,source.packetfence.radius_log.reading_winbind_reply_failed,source.packetfence.radius_log.sql_reject
+
+[metric 'RADIUS radius-acct.log']
+type=tail_file
+file=/usr/local/pf/logs/radius-acct.log
+match=ERROR
+statsd_ns=source.packetfence.radius_acct_log.error
 
 [metric 'Mariadb mariadb_error.log']
 type=tail_file
@@ -239,3 +245,8 @@ file=/usr/local/pf/logs/pfmon.log
 match=ERROR,WARNING
 statsd_ns=source.packetfence.pfmon_log.error,source.packetfence.pfmon_log.warning
 
+[metric 'Events in fingerbank.log']
+type=tail_file
+file=/usr/local/pf/logs/fingerbank.log
+match=An error occured while interrogating upstream Fingerbank project
+statsd_ns=source.packetfence.fingerbank_log.api_error
