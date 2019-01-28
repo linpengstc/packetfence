@@ -291,9 +291,9 @@ func TestTokenAuthorizationMiddlewareBearerRequestIsAuthorized(t *testing.T) {
 	}
 
 	// Test valid scoped tenant ID for configuration namespace
-	res, err = m.IsAuthorized(ctx, "DELETE", "/api/v1/config/violations", 1, &TokenInfo{
+	res, err = m.IsAuthorized(ctx, "DELETE", "/api/v1/config/security_events", 1, &TokenInfo{
 		AdminRoles: map[string]bool{
-			"VIOLATIONS_DELETE": true,
+			"SECURITY_EVENTS_DELETE": true,
 		},
 		TenantId: AccessAllTenants,
 	})
@@ -303,9 +303,9 @@ func TestTokenAuthorizationMiddlewareBearerRequestIsAuthorized(t *testing.T) {
 	}
 
 	// Test invalid scoped tenant ID
-	res, err = m.IsAuthorized(ctx, "DELETE", "/api/v1/config/violations", 1, &TokenInfo{
+	res, err = m.IsAuthorized(ctx, "DELETE", "/api/v1/config/security_events", 1, &TokenInfo{
 		AdminRoles: map[string]bool{
-			"VIOLATIONS_DELETE": true,
+			"SECURITY_EVENTS_DELETE": true,
 		},
 		TenantId: 2,
 	})
