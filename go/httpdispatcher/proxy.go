@@ -171,7 +171,7 @@ func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			</WISPAccessGatewayParam>-->
 	</body>
 </html>`)
-		t.Execute(w, PortalURL)
+		t.Execute(w, &PortalURL)
 
 		log.LoggerWContext(ctx).Debug(fmt.Sprintln(host, "REDIRECT"))
 		return
