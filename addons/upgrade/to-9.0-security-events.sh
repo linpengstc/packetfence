@@ -22,4 +22,13 @@ echo "Renaming violations related data in stats.conf"
 sed -i$SED_BAK_SUFFIX 's/source\.packetfence\.violations/source.packetfence.security_events/g' /usr/local/pf/conf/stats.conf
 sed -i$SED_BAK_SUFFIX 's/from violation/from security_event/g' /usr/local/pf/conf/stats.conf
 
+echo "Renaming API calls in pfdetect.conf"
+sed -i$SED_BAK_SUFFIX 's/trigger_violation/trigger_security_event/g' /usr/local/pf/conf/pfdetect.conf
+
+echo "Renaming existing violation.log to security_event.log"
+yes | mv /usr/local/pf/logs/violation.log /usr/local/pf/logs/security_event.log
+
+echo "Renaming portal templates directories"
+find /usr/local/pf/html/captive-portal/profile-templates/ -mindepth 1 -maxdepth 1 -type d -exec /bin/bash -c '[ -d {}/violations ] && echo "Renaming violations directory for profile {}" && mv {}/violations {}/security_events' \;
+
 echo "Completed renaming"
